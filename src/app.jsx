@@ -1,8 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 
 import './app.css';
 import Home from './pages/home';
 import About from './pages/about';
+import Blockchain from './pages/blockchain';
 
 function App() {
   return (
@@ -10,7 +11,12 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Home />}>
+          <Route path=":blockchain" element={<Blockchain />} />
+        </Route>
+        <Route path="/blockchain" element={<Outlet />}>
+          <Route path=":blockchain" element={<Blockchain />} />
+        </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
